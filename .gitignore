@@ -34,3 +34,8 @@ go.work
 .envrc.*
 !.envrc.example
 .env
+
+# kubefirst assets
+gitops/
+metaphor/
+minio/

@@ -1,12 +1,18 @@
 # [kubefirst](https://docs.kubefirst.io/k3d/quick-start/install) on [k3d](https://k3d.io/)
 
-## Get credentials
+## Install
+
+Follow these [instructions](https://docs.kubefirst.io/k3d/quick-start/install) to install [kubefirst](https://docs.kubefirst.io/) or run [install.sh](hack/install.sh)
+
+## Post-Install
+
+### Get credentials
 
   ```sh
   kubefirst k3d root-credentials
   ```
 
-## Create `.env` file with all the secrets
+### Create `.env` file with all the secrets
 
   ```sh
   kubefirst terraform set-env \
@@ -21,7 +27,7 @@
   vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.PERSONAL_ACCESS_TOKEN
   ```
 
-## Download MinIO buckets
+### Download MinIO buckets
 
   ```sh
   mc alias set local https://minio.kubefirst.dev \
@@ -34,16 +40,14 @@
   mc cp local --recursive minio
   ```
 
-## Clone GitOps and Metaphor repositories
+### Clone GitOps and Metaphor repositories
 
   ```sh
-  rm -rf gitops
-  rm -rf metaphor
-  git cr https://github.com/malston/gitops.git
-  git cr https://github.com/malston/metaphor.git
+  git clone --recursive https://github.com/malston/gitops.git
+  git clone --recursive https://github.com/malston/metaphor.git
   ```
   
-## Unseal Vault
+### Unseal Vault
 
   ```sh
   kubefirst k3d unseal-vault

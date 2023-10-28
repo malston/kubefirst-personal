@@ -18,8 +18,12 @@ Follow these [instructions](https://docs.kubefirst.io/k3d/quick-start/install) t
   kubefirst terraform set-env \
     --vault-token $(kubectl get secrets -n vault vault-unseal-secret -o jsonpath='{.data.root-token}' | base64 -d) \
     --vault-url https://vault.kubefirst.dev
-  echo export GITHUB_TOKEN=\"$(read -rs TOKEN; echo $TOKEN)\" >> .env
   source .env
+  ```
+
+### Peek at some Vault Secrets
+
+  ```sh
   vault kv list secret
   vault kv get -mount=secret atlantis
   vault kv get -mount=secret ci-secrets

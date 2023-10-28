@@ -6,18 +6,13 @@
   kubefirst k3d root-credentials
   ```
 
-## Get the vault root token from cluster
-
-  ```sh
-  kubectl get secrets -n vault vault-unseal-secret -o jsonpath='{.data.root-token}' | base64 -d
-  ```
-
 ## Create `.env` file with all the secrets
 
   ```sh
   kubefirst terraform set-env \
     --vault-token $(kubectl get secrets -n vault vault-unseal-secret -o jsonpath='{.data.root-token}' | base64 -d) \
     --vault-url https://vault.kubefirst.dev
+  echo export GITHUB_TOKEN=\"$(read -rs TOKEN; echo $TOKEN)\" >> .env
   source .env
   vault kv list secret
   vault kv get -mount=secret atlantis
@@ -26,7 +21,7 @@
   vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.PERSONAL_ACCESS_TOKEN
   ```
 
-## Download minio buckets
+## Download MinIO buckets
 
   ```sh
   mc alias set local https://minio.kubefirst.dev \
@@ -39,7 +34,7 @@
   mc cp local --recursive minio
   ```
 
-## Clone gitops and metaphor
+## Clone GitOps and Metaphor repositories
 
   ```sh
   rm -rf gitops
@@ -48,8 +43,8 @@
   git cr https://github.com/malston/metaphor.git
   ```
   
-## Unseal
+## Unseal Vault
 
   ```sh
-  vault operator unseal $(kubectl get secrets -n vault vault-unseal-secret -o jsonpath='{.data.root-token}')
+  kubefirst k3d unseal-vault
   ```

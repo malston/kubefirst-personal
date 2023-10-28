@@ -47,7 +47,7 @@ Follow these [instructions](https://docs.kubefirst.io/k3d/quick-start/install) t
   git clone --recursive https://github.com/malston/metaphor.git
   ```
   
-### Unseal Vault
+### Unseal Vault (if this becomes sealed for any reason)
 
   ```sh
   kubefirst k3d unseal-vault

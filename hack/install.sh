@@ -32,7 +32,12 @@ kubefirst k3d create
 export KUBECONFIG=$HOME/.k1/kubefirst/kubeconfig
 
 kubefirst terraform set-env \
-  --vault-token "$(kubectl --kubeconfig="$HOME/.k1/kubefirst/kubeconfig" get secrets -n vault vault-unseal-secret -o jsonpath='{.data.root-token}' | base64 -d)" \
+  --vault-token "$(kubectl \
+    --kubeconfig="$HOME/.k1/kubefirst/kubeconfig" \
+    get secrets \
+    -n vault vault-unseal-secret \
+    -o jsonpath='{.data.root-token}' \
+    | base64 -d)" \
   --vault-url https://vault.kubefirst.dev
 
 echo "export KUBECONFIG=$HOME/.k1/kubefirst/kubeconfig" >> .env

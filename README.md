@@ -56,3 +56,10 @@ Follow these [instructions](https://docs.kubefirst.io/k3d/quick-start/install) t
   ```sh
   kubefirst k3d unseal-vault
   ```
+
+### Login to [Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
+
+  ```sh
+  vault kv get -format=json -mount=secret dockerconfigjson | jq -r '.data.data.dockerconfig' | jq -r '.auths."ghcr.io".auth' | base64 --decode
+  echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+  ```

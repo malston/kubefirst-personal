@@ -5,6 +5,7 @@ set -o errexit
 brew update
 brew upgrade mkcert || brew install mkcert
 mkcert -install
+brew upgrade nss || brew install nss
 
 function read_password() {
   local prompt="$1"
@@ -27,7 +28,7 @@ fi
 
 kubefirst k3d create
 
-"$HOME/.k1/kubefirst/tools/mkcert" -install
+# "$HOME/.k1/kubefirst/tools/mkcert" -install
 
 export KUBECONFIG=$HOME/.k1/kubefirst/kubeconfig
 

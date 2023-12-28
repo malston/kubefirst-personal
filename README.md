@@ -12,6 +12,16 @@ Follow these [instructions](https://docs.kubefirst.io/k3d/quick-start/install) t
   kubefirst k3d root-credentials
   ```
 
+If you created your cluster using the UI, or reset your `kubefirst` environment, you can still retrieve the root credentials (except the `kbot` user password, which you will have to find manually in Vault) using `kubectl`:
+
+  ```sh
+  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+  ```
+
+  ```sh
+  kubectl -n vault get secret vault-unseal-secret -o jsonpath="{.data.root-token}" | base64 -d
+  ```
+
 ### Create `.env` file with all the secrets
 
   ```sh

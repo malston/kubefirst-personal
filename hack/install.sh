@@ -3,9 +3,10 @@
 set -o errexit
 
 brew update
+brew upgrade kubefirst || brew install kubefirst/tools/kubefirst
 brew upgrade mkcert || brew install mkcert
-mkcert -install
 brew upgrade nss || brew install nss
+mkcert -install
 
 function read_password() {
   local prompt="$1"

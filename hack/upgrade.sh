@@ -3,4 +3,4 @@
 set -o errexit
 
 brew update
-brew upgrade kubefirst mkcert
+brew upgrade kubefirst mkcert nss

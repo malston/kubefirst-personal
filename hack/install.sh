@@ -2,6 +2,8 @@
 
 set -o errexit
 
+__DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+
 brew update
 brew upgrade kubefirst || brew install kubefirst/tools/kubefirst
 brew upgrade mkcert || brew install mkcert
@@ -27,11 +29,19 @@ if [[ -z $GITHUB_TOKEN ]]; then
   GITHUB_TOKEN=$(read_password "Enter a Github Personal Access Token: ")
 fi
 
-kubefirst k3d create
+kubefirst k3d create \
+  --cluster-name kubefirst \
+  --cluster-type mgmt \
+  --github-user malston \
+  --git-provider github
 
-# "$HOME/.k1/kubefirst/tools/mkcert" -install
+kubefirst k3d root-credentials
 
 export KUBECONFIG=$HOME/.k1/kubefirst/kubeconfig
+
+if [[ -f "$__DIR/../.env" ]]; then
+  cp "$__DIR/../.env" "$__DIR/../.env.bak"
+fi
 
 kubefirst terraform set-env \
   --vault-token "$(kubectl \
@@ -50,3 +60,6 @@ echo  --- ArgoCD -----------------------------------------------------------
 echo  URL: https://argocd.kubefirst.dev
 echo  --- Vault ------------------------------------------------------------
 echo  URL: https://vault.kubefirst.dev
+
+git clone --recursive https://github.com/malston/gitops.git "$__DIR/../gitops"
+git clone --recursive https://github.com/malston/metaphor.git "$__DIR/../metaphor"

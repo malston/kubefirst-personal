@@ -36,6 +36,7 @@ If you created your cluster using the UI, or reset your `kubefirst` environment,
   ```sh
   vault kv list secret
   vault kv get -mount=secret atlantis
+  vault kv get -mount=secret atlantis-ngrok
   vault kv get -mount=secret ci-secrets
   vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.accesskey
   vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.PERSONAL_ACCESS_TOKEN
@@ -61,7 +62,7 @@ If you created your cluster using the UI, or reset your `kubefirst` environment,
   git clone --recursive https://github.com/malston/metaphor.git
   ```
   
-### Unseal Vault (if this becomes sealed for any reason)
+### Unseal Vault (if this becomes sealed for any reason, see [faq](https://docs.kubefirst.io/k3d/faq#how-can-i-unseal-hashicorp-vault))
 
   ```sh
   kubefirst k3d unseal-vault

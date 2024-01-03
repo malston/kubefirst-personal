@@ -29,6 +29,8 @@ if [[ -z $GITHUB_TOKEN ]]; then
   GITHUB_TOKEN=$(read_password "Enter a Github Personal Access Token: ")
 fi
 
+# k3d cluster create gimlet-cluster --k3s-arg "--disable=traefik@server:0"
+
 kubefirst k3d create \
   --cluster-name kubefirst \
   --cluster-type mgmt \

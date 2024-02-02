@@ -66,8 +66,9 @@ if [[ $INSTALL_TOOLS = true ]]; then
   brew upgrade kubefirst || brew install kubefirst/tools/kubefirst
   brew upgrade mkcert || brew install mkcert
   brew upgrade nss || brew install nss
-  mkcert -install
 fi
+
+mkcert -install
 
 case $GIT_PROVIDER in
   github)

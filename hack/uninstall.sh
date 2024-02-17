@@ -25,3 +25,10 @@ rm -rf ~/.k1
 rm -rf "$__DIR/../gitops/"
 rm -rf "$__DIR/../metaphor/"
 rm -rf "$__DIR/../minio/"
+
+kubectl config delete-user admin@k3d-kubefirst
+kubectl config delete-user admin@k3d-kubefirst-console
+kubectl config delete-cluster k3d-kubefirst
+kubectl config delete-cluster k3d-kubefirst-console
+kubectl config delete-context k3d-kubefirst
+kubectl config delete-context k3d-kubefirst-console

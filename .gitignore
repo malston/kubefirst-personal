@@ -34,6 +34,7 @@ go.work
 .envrc.*
 !.envrc.example
 .env
+.env.bak
 
 # kubefirst assets
 gitops/

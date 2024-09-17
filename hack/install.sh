@@ -68,6 +68,7 @@ if [[ $INSTALL_TOOLS == true ]]; then
   brew upgrade nss || brew install nss
 fi
 
+# Create a new local CA
 mkcert -install
 
 case $GIT_PROVIDER in

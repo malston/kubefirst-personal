@@ -62,7 +62,9 @@ If you created your cluster using the UI, or reset your `kubefirst` environment,
   git clone --recursive https://github.com/malston/metaphor.git
   ```
   
-### Unseal Vault (if this becomes sealed for any reason, see [faq](https://docs.kubefirst.io/k3d/faq#how-can-i-unseal-hashicorp-vault))
+### Unseal Vault
+
+If vault becomes sealed for any reason, see [faq](https://docs.kubefirst.io/k3d/faq#how-can-i-unseal-hashicorp-vault).
 
   ```sh
   kubefirst k3d unseal-vault
@@ -72,5 +74,5 @@ If you created your cluster using the UI, or reset your `kubefirst` environment,
 
   ```sh
   vault kv get -format=json -mount=secret dockerconfigjson | jq -r '.data.data.dockerconfig' | jq -r '.auths."ghcr.io".auth' | base64 --decode
-  echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+  echo $GITHUB_TOKEN | docker login ghcr.io -u malston --password-stdin
   ```

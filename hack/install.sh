@@ -83,7 +83,7 @@ case $GIT_PROVIDER in
     kubefirst k3d create \
       --cluster-name kubefirst \
       --cluster-type mgmt \
-      --github-user malston \
+      --github-org malston \
       --git-provider github
     ;;
   gitlab)
@@ -97,7 +97,7 @@ case $GIT_PROVIDER in
     kubefirst k3d create \
       --cluster-name kubefirst \
       --cluster-type mgmt \
-      --github-user marktalston \
+      --github-org marktalston \
       --gitlab-group marsguitars \
       --git-provider gitlab
     ;;

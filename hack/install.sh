@@ -66,6 +66,7 @@ if [[ $INSTALL_TOOLS == true ]]; then
   brew upgrade kubefirst || brew install kubefirst/tools/kubefirst
   brew upgrade mkcert || brew install mkcert
   brew upgrade nss || brew install nss
+  brew upgrade hashicorp/tap/vault || brew tap hashicorp/tap && brew install hashicorp/tap/vault
 fi
 
 # Create a new local CA
